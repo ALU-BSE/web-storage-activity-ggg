@@ -272,6 +272,27 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
     
+    window.addEventListener('resize', function() {
+        // Adjust UI elements if needed on resize
+        const windowWidth = window.innerWidth;
+        
+        // Example of dynamic UI adjustments
+        if (windowWidth <= 480) {
+            // Mobile view adjustments
+            document.querySelectorAll('.product-actions').forEach(el => {
+                el.classList.add('mobile-view');
+            });
+        } else {
+            // Desktop/tablet view
+            document.querySelectorAll('.product-actions').forEach(el => {
+                el.classList.remove('mobile-view');
+            });
+        }
+    });
+    
+    // Call once on page load to set initial state
+    window.dispatchEvent(new Event('resize'));
+    
     // Initialize cart display
     updateCart();
     
