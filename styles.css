@@ -136,6 +136,48 @@ footer ul li a {
     opacity: 0.8;
 }
 
+/* Dark Theme Styles */
+.dark-theme {
+    background-color: #121212;
+    color: #f8f9fa;
+}
+
+.dark-theme header {
+    background-color: #000000;
+}
+
+.dark-theme .login,
+.dark-theme .product-card,
+.dark-theme #cartSection {
+    background-color: #2c2c2c;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme input[type="text"],
+.dark-theme input[type="password"] {
+    background-color: #3c3c3c;
+    color: white;
+    border-color: #444;
+}
+
+.dark-theme .product-price {
+    color: #f8f9fa;
+}
+
+.dark-theme footer {
+    background-color: #000000;
+}
+
+.dark-theme .table {
+    color: #f8f9fa;
+}
+
+.dark-theme .alert-info {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    border-color: #34495e;
+}
+
 @media (max-width: 768px) {
     nav ul {
         flex-direction: column;
@@ -144,4 +186,20 @@ footer ul li a {
     nav ul li {
         margin: 5px 0;
     }
+}
+/* Prevent transition flicker */
+.no-transition,
+.no-transition * {
+    transition: none !important;
+}
+
+/* Set a consistent transition duration */
+body, 
+.login,
+.product-card,
+#cartSection,
+input,
+.product-price,
+.shopping-section {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }

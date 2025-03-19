@@ -4,7 +4,7 @@ const sampleProducts = [
         id: 1,
         name: "Product 1",
         price: 19.99,
-        description: "Description for Product 1",
+        description: "It's a fantastic item that you'll love",
         imageUrl: "product1.jpg",
         category: "Category 1"
     },
@@ -12,7 +12,7 @@ const sampleProducts = [
         id: 2,
         name: "Product 2",
         price: 29.99,
-        description: "Description for Product 2",
+        description: "Product 2 is our premium offering with enhanced features",
         imageUrl: "product2.jpg",
         category: "Category 2"
     },
@@ -78,7 +78,16 @@ function displayProducts() {
         productCatalog.appendChild(productCard);
     });
 }
+let productsLoaded = false;
 
+function loadProducts() {
+    if (productsLoaded) return; // Prevent multiple loads
+    
+    const productCatalog = document.querySelector('.product-catalog');
+    if (!productCatalog) return;
+
+    productsLoaded = true; // Mark as loaded
+}
 // Function to view product details (can be expanded for a modal)
 function viewProductDetails(productId) {
     const product = sampleProducts.find(p => p.id === productId);
