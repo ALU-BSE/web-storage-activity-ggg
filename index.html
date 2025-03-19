@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Demo Application</title>
+    <link rel="stylesheet"  href="styles.css">
+</head>
+<body class="light">
+    <div class="container">
+        <h1>E-Commerce Demo</h1>
+        
+        <!-- User Info Section (shown when logged in) -->
+        <div id="userInfo" class="user-info">
+            <span>Welcome, <span id="displayUsername">User</span>!</span>
+            <span>Last login: <span id="lastLogin">Never</span></span>
+        </div>
+        
+        <!-- Login Form -->
+        <form id="loginForm" class="form" novalidate>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" 
+                       placeholder="Enter your username" 
+                       autocomplete="username" 
+                       pattern="[a-zA-Z0-9_]{3,20}"
+                       title="Username should be 3-20 characters and can contain letters, numbers, and underscores"
+                       required>
+                <div class="error-message" id="username-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" 
+                       placeholder="Enter your password" 
+                       autocomplete="current-password"
+                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
+                       title="Password should be at least 8 characters with at least one uppercase letter, one lowercase letter, and one number"
+                       required>
+                <div class="error-message" id="password-error"></div>
+            </div>
+            <input type="hidden" id="csrfToken" name="csrfToken">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        
+        <!-- Buttons Section -->
+        <div class="button-group">
+            <button id="logoutButton" class="btn btn-secondary" style="display:none;">Logout</button>
+            <button id="themeToggle" class="btn btn-outline">Switch to Dark Theme</button>
+        </div>
+        
+        <!-- Success Message -->
+        <div id="loginSuccess" class="login-success" aria-live="polite">Login Successful</div>
+        
+        <!-- Shopping Section (shown when logged in) -->
+        <section id="shoppingSection" class="shopping-section" style="display:none;">
+            <h2>Product Catalog</h2>
+            <div class="product-catalog">
+                <div class="product-card">
+                    <h3>Book</h3>
+                    <p>A fascinating book about web development</p>
+                    <div class="product-actions">
+                        <span class="product-price">$19.99</span>
+                        <button class="btn btn-accent add-to-cart" data-product="Book" data-price="19.99">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <h3>T-Shirt</h3>
+                    <p>Comfortable cotton t-shirt with logo</p>
+                    <div class="product-actions">
+                        <span class="product-price">$24.99</span>
+                        <button class="btn btn-accent add-to-cart" data-product="T-Shirt" data-price="24.99">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <h3>Coffee Mug</h3>
+                    <p>Ceramic mug for your morning coffee</p>
+                    <div class="product-actions">
+                        <span class="product-price">$12.99</span>
+                        <button class="btn btn-accent add-to-cart" data-product="Coffee Mug" data-price="12.99">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>Shopping Cart</h2>
+            <div id="cartItems" class="cart-items">
+                <!-- Cart items will be displayed here -->
+                <div class="empty-cart-message">Your cart is empty</div>
+            </div>
+            <div id="cartSummary" class="cart-summary">
+                <span>Total Items: <span id="totalItems">0</span></span>
+                <span>Total: $<span id="cartTotal">0.00</span></span>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Modal -->
+    <div id="modalOverlay" class="modal-overlay"></div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <p id="modalMessage"></p>
+        </div>
+        <div class="modal-footer">
+            <button id="closeModalButton" class="btn btn-primary">OK</button>
+        </div>
+    </div>
+    
+    <script src="scripts.js"></script>
+</body>
+</html>
