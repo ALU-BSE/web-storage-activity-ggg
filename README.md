@@ -24,8 +24,15 @@ document.cookie = "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
 
 **Questions:**  
 - Why are `HttpOnly` and `Secure` flags important for cookies?  
+
+- HttpOnly prevents client-side access to cookies, reducing XSS risks, while Secure ensures cookies are sent only over HTTPS. Together, they enhance session security and user privacy. 
+- HttpOnly  protects session cookies, preventing attackers from stealing authentication tokens through injected scripts.
+-Using both together enhances session security and user privacy, ensuring that sensitive data remains protected from common web vulnerabilities
+
 - How do session cookies differ from persistent cookies in this context?  
 
+- session cookies and persistent cookies differ mainly in their lifespan and storage behavior.
+- session cookies  expire once the user closes the browser, not saved to disk and its Commonly used for authentication sessions while Pesistent cookies are cookies that persist beyond a single browsing session, Stored on the user’s device  with an explicit expiration time and is Used for remembering user preferences, login sessions, tracking, etc.
 ---
 
 ### **Task 2: Theme Preferences with Local Storage**  
