@@ -32,7 +32,7 @@ document.cookie = "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
 - How do session cookies differ from persistent cookies in this context?  
 
 - session cookies and persistent cookies differ mainly in their lifespan and storage behavior.
-- session cookies  expire once the user closes the browser, not saved to disk and its Commonly used for authentication sessions while Pesistent cookies are cookies that persist beyond a single browsing session, Stored on the user’s device  with an explicit expiration time and is Used for remembering user preferences, login sessions, tracking, etc.
+- session cookies  expire once the user closes the browser, not saved to disk and its Commonly used for authentication sessions while Pesistent cookies are cookies that persist beyond a single browsing session, Stored on the user’s device  with an explicit expiration time and is Used for remembering user preferences, login sessions, tracking...
 ---
 
 ### **Task 2: Theme Preferences with Local Storage**  
@@ -55,7 +55,10 @@ document.body.classList.add(savedTheme);
 - Use `JSON.stringify` and `JSON.parse` to store/retrieve a settings object (e.g., `{ theme: "dark", fontSize: 16 }`).  
 
 **Questions:**  
-- What happens if local storage exceeds its size limit? How would you handle this?  
+- What happens if local storage exceeds its size limit? How would you handle this?
+
+- When local storage exceeds its limit, new data cannot be saved, and a QuotaExceededError is thrown. To handle this, check storage usage before writing, catch errors with a `try-catch` block, clear old or unnecessary data, and consider alternatives like  server-side storage.
+ 
 
 ---
 
