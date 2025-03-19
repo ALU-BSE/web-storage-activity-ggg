@@ -21,21 +21,21 @@
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" 
-                       placeholder="Enter your username" 
-                       autocomplete="username" 
-                       pattern="[a-zA-Z0-9_]{3,20}"
-                       title="Username should be 3-20 characters and can contain letters, numbers, and underscores"
-                       required>
+                    placeholder="Enter your username" 
+                    autocomplete="username" 
+                    pattern="[a-zA-Z0-9_]{3,20}"
+                    title="Username should be 3-20 characters and can contain letters, numbers, and underscores"
+                    required>
                 <div class="error-message" id="username-error"></div>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" 
-                       placeholder="Enter your password" 
-                       autocomplete="current-password"
-                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
-                       title="Password should be at least 8 characters with at least one uppercase letter, one lowercase letter, and one number"
-                       required>
+                    placeholder="Enter your password" 
+                    autocomplete="current-password"
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
+                    title="Password should be at least 8 characters with at least one uppercase letter, one lowercase letter, and one number"
+                    required>
                 <div class="error-message" id="password-error"></div>
             </div>
             <input type="hidden" id="csrfToken" name="csrfToken">
