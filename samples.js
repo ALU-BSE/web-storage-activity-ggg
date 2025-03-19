@@ -100,6 +100,11 @@ function displayProducts() {
     console.log("[DEBUG] Clearing existing products");
     productCatalog.innerHTML = ''; // Clear existing products
     
+    // Create a row container for products
+    const rowContainer = document.createElement('div');
+    rowContainer.classList.add('row', 'g-4');
+    productCatalog.appendChild(rowContainer);
+    
     console.log("[DEBUG] Beginning to render", sampleProducts.length, "products");
     
     sampleProducts.forEach(product => {
@@ -133,42 +138,48 @@ function displayProducts() {
                 <span class="small">${product.rating}/5</span>
             </div>` : '';
         
-        // Create a product card
+        // Create a product card with image on left and details on right
         const productCard = document.createElement('div');
-        productCard.classList.add('product-card', 'col-md-3', 'mb-4');
+        productCard.classList.add('col-md-6', 'mb-4'); // Two cards per row
 
         productCard.innerHTML = `
             <div class="card h-100">
-                <div class="position-relative">
-                    <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}" 
-                        onerror="this.src='https://via.placeholder.com/150'">
-                    ${stockStatus}
-                </div>
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">${product.name}</h5>
-                    ${ratingDisplay}
-                    <p class="card-text">${product.description}</p>
-                    <p class="card-text"><strong>Price:</strong> $${product.price.toFixed(2)}</p>
-                    <p class="card-text"><strong>Category:</strong> ${product.category}</p>
-                    ${featuresList}
-                    ${colorsList}
-                    <div class="mt-auto pt-2 d-flex justify-content-between">
-                        <button class="btn btn-sm btn-outline-primary" onclick="viewProductDetails(${product.id})">
-                            View Details
-                        </button>
-                        <button class="btn btn-sm ${buttonClass} add-cart-btn-${product.id}" onclick="${buttonAction}">
-                            ${buttonText}
-                        </button>
+                <div class="row g-0">
+                    <div class="col-md-4 position-relative">
+                        <img src="${product.imageUrl}" class="img-fluid rounded-start h-100 w-100 object-fit-cover" 
+                            alt="${product.name}" onerror="this.src='https://via.placeholder.com/150'">
+                        <div class="position-absolute top-0 start-0 m-2">
+                            ${stockStatus}
+                        </div>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Added on: ${new Date(product.dateAdded).toLocaleDateString()}</small>
+                    <div class="col-md-8">
+                        <div class="card-body d-flex flex-column h-100">
+                            <h5 class="card-title">${product.name}</h5>
+                            ${ratingDisplay}
+                            <p class="card-text">${product.description}</p>
+                            <p class="card-text"><strong>Price:</strong> $${product.price.toFixed(2)}</p>
+                            <p class="card-text"><strong>Category:</strong> ${product.category}</p>
+                            ${featuresList}
+                            ${colorsList}
+                            <div class="mt-auto pt-2 d-flex justify-content-between">
+                                <button class="btn btn-sm btn-outline-primary" onclick="viewProductDetails(${product.id})">
+                                    View Details
+                                </button>
+                                <button class="btn btn-sm ${buttonClass} add-cart-btn-${product.id}" onclick="${buttonAction}">
+                                    ${buttonText}
+                                </button>
+                            </div>
+                            <div class="mt-2">
+                                <small class="text-muted">Added on: ${new Date(product.dateAdded).toLocaleDateString()}</small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         `;
         
-        // Append the product card to the catalog
-        productCatalog.appendChild(productCard);
+        // Append the product card to the row container
+        rowContainer.appendChild(productCard);
         console.log(`[DEBUG] Enhanced product ${product.id} added to catalog`);
     });
     
@@ -197,25 +208,35 @@ function viewProductDetails(productId) {
     }
     
     const detailsContent = `
-        <h2>${product.name}</h2>
-        <p>${product.description}</p>
-        <p><strong>Price:</strong> $${product.price.toFixed(2)}</p>
-        <p><strong>Category:</strong> ${product.category}</p>
-        <p><strong>In Stock:</strong> ${product.stock} units</p>
-        <p><strong>Rating:</strong> ${product.rating}/5</p>
-        
-        <h4>Features:</h4>
-        <ul>
-            ${product.features ? product.features.map(f => `<li>${f}</li>`).join('') : 'No features listed'}
-        </ul>
-        
-        <h4>Available Colors:</h4>
-        <p>${product.colors ? product.colors.join(', ') : 'No color options'}</p>
-        
-        <h4>Specifications:</h4>
-        <ul>
-            ${specsList || 'No specifications listed'}
-        </ul>
+        <div class="row">
+            <div class="col-md-4">
+                <img src="${product.imageUrl}" class="img-fluid rounded" alt="${product.name}" 
+                    onerror="this.src='https://via.placeholder.com/300'">
+            </div>
+            <div class="col-md-8">
+                <h2>${product.name}</h2>
+                <p>${product.description}</p>
+                <p><strong>Price:</strong> $${product.price.toFixed(2)}</p>
+                <p><strong>Category:</strong> ${product.category}</p>
+                <p><strong>In Stock:</strong> ${product.stock} units</p>
+                <p><strong>Rating:</strong> ${product.rating}/5</p>
+                
+                <h4>Features:</h4>
+                <ul>
+                    ${product.features ? product.features.map(f => `<li>${f}</li>`).join('') : 'No features listed'}
+                </ul>
+                
+                <h4>Available Colors:</h4>
+                <p>${product.colors ? product.colors.join(', ') : 'No color options'}</p>
+                
+                <h4>Specifications:</h4>
+                <ul>
+                    ${specsList || 'No specifications listed'}
+                </ul>
+                
+                <button class="btn btn-primary" onclick="addToCart(${product.id})">Add to Cart</button>
+            </div>
+        </div>
     `;
     
     console.log(`[DEBUG] Displaying detailed modal for product ${productId}`);
