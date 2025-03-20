@@ -82,6 +82,12 @@ sessionStorage.setItem("cart", JSON.stringify(cart));
 **Questions:**  
 - Why is session storage suitable for this use case?  
 
+- This is suitable because Data is stored only for the duration of the session and is automatically cleared when the browser is closed, ensuring a fresh cart each time. and in addition to that it ensures that outdated cart data doesn’t persist across sessions, improving user experience.
+-  And Session storage provides quick, local access to cart data without requiring server requests.
+- Since session storage data is cleared when the browser is closed, it reduces the risk of unauthorized access to cart information, especially on shared or public computers.
+
+
+
 ---
 
 ### **Task 4: Security Implementation**  
