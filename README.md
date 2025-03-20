@@ -1,3 +1,4 @@
+[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=18766825)
 
 **Group Activity: Implementing Web Storage Mechanisms in an E-Commerce Site**  
 *Objective:* Apply knowledge of Cookies, Local Storage, and Session Storage to build a secure and functional e-commerce demo.  
@@ -23,8 +24,15 @@ document.cookie = "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
 
 **Questions:**  
 - Why are `HttpOnly` and `Secure` flags important for cookies?  
+
+- HttpOnly prevents client-side access to cookies, reducing XSS risks, while Secure ensures cookies are sent only over HTTPS. Together, they enhance session security and user privacy. 
+- HttpOnly  protects session cookies, preventing attackers from stealing authentication tokens through injected scripts.
+-Using both together enhances session security and user privacy, ensuring that sensitive data remains protected from common web vulnerabilities
+
 - How do session cookies differ from persistent cookies in this context?  
 
+- session cookies and persistent cookies differ mainly in their lifespan and storage behavior.
+- session cookies  expire once the user closes the browser, not saved to disk and its Commonly used for authentication sessions while Pesistent cookies are cookies that persist beyond a single browsing session, Stored on the user’s device  with an explicit expiration time and is Used for remembering user preferences, login sessions, tracking...
 ---
 
 ### **Task 2: Theme Preferences with Local Storage**  
@@ -47,7 +55,10 @@ document.body.classList.add(savedTheme);
 - Use `JSON.stringify` and `JSON.parse` to store/retrieve a settings object (e.g., `{ theme: "dark", fontSize: 16 }`).  
 
 **Questions:**  
-- What happens if local storage exceeds its size limit? How would you handle this?  
+- What happens if local storage exceeds its size limit? How would you handle this?
+
+- When local storage exceeds its limit, new data cannot be saved, and a QuotaExceededError is thrown. To handle this, check storage usage before writing, catch errors with a `try-catch` block, clear old or unnecessary data, and consider alternatives like  server-side storage.
+ 
 
 ---
 
@@ -70,6 +81,12 @@ sessionStorage.setItem("cart", JSON.stringify(cart));
 
 **Questions:**  
 - Why is session storage suitable for this use case?  
+
+- This is suitable because Data is stored only for the duration of the session and is automatically cleared when the browser is closed, ensuring a fresh cart each time. and in addition to that it ensures that outdated cart data doesn’t persist across sessions, improving user experience.
+-  And Session storage provides quick, local access to cart data without requiring server requests.
+- Since session storage data is cleared when the browser is closed, it reduces the risk of unauthorized access to cart information, especially on shared or public computers.
+
+
 
 ---
 
@@ -105,8 +122,16 @@ document.getElementById("form").innerHTML += `<input type="hidden" name="csrfTok
 
 2. **Discussion Questions:**  
    - When would you use cookies over local storage?  
-   - What are the risks of storing passwords in session storage?  
 
+   -  Cookies are ideal for storing small amounts of data  that need an expiration time 
+   - Cookies can be sent automatically with every HTTP request, making them useful for authentication tokens, user sessions, and preferences 
+
+   - What are the risks of storing passwords in session storage?  
+   
+   - Data in session storage is stored as plain text, making it vulnerable to XSS attacks
+   - Any script running on the page can access session storage, also increasing exposure to attacks.
+   - If a user accidentally closes the tab, they must re-enter their credentials, leading to poor user experience
+   
 ---
 
 ### **Final Challenge: Integration**  
