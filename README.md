@@ -122,8 +122,16 @@ document.getElementById("form").innerHTML += `<input type="hidden" name="csrfTok
 
 2. **Discussion Questions:**  
    - When would you use cookies over local storage?  
-   - What are the risks of storing passwords in session storage?  
 
+   -  Cookies are ideal for storing small amounts of data  that need an expiration time 
+   - Cookies can be sent automatically with every HTTP request, making them useful for authentication tokens, user sessions, and preferences 
+
+   - What are the risks of storing passwords in session storage?  
+   
+   - Data in session storage is stored as plain text, making it vulnerable to XSS attacks
+   - Any script running on the page can access session storage, also increasing exposure to attacks.
+   - If a user accidentally closes the tab, they must re-enter their credentials, leading to poor user experience
+   
 ---
 
 ### **Final Challenge: Integration**  
